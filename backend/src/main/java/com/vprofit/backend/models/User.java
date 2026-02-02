@@ -15,77 +15,70 @@ public class User implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable=false)
+    @Column(name="name", nullable=false)
     private String name;
     
     @Column(unique=true, nullable=false)
     private String email;
     
     @Column(nullable=false)
-    private Date dateJoined;
+    private Date createdAt;
+    
+    @Column(nullable=false)
+    private Date updatedAt;
+
+    @Column
+    private boolean isActive;
     
     @Column(nullable=false)
     private String password;
 
-    public User() {
-        this.dateJoined = new Date();
-    }
-
     public User(String name, String email, String password) {
+        if(name == null || name.equals("")){
+            throw new IllegalArgumentException("O usuario nao pode ser criado sem nome");
+        }
+        if(email == null || email.equals("")){ //TODO: Add regex validation
+            throw new IllegalArgumentException("O usuario nao pode ser criado sem email");
+        }
+        if(password == null || password.equals("")){
+            throw new IllegalArgumentException("O usuario nao pode ser criado sem senha");
+        }
+
         this.name = name;
         this.email = email; 
         this.password = password;
-        this.dateJoined = new Date();
+        this.createdAt = new Date();
+        this.isActive = true;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    // Getters and Setters 
+    // Getter
+    public String getName(){
         return this.name;
     }
-    
-    public void setName(String newName) {
-        this.name = newName;
-    }
-    
-    public String getEmail() {
+    public String getEmail(){
         return this.email;
     }
-    
-    public void setEmail(String newEmail) {
-        this.email = newEmail;
-    }
-    
-    public Date getDateJoined() {
-        return this.dateJoined;
-    }
-    
-    public void setDateJoined(Date dateJoined) {
-        this.dateJoined = dateJoined;
-    }
-    
-    public String getPassword() {
+    public String getPassword(){
         return this.password;
     }
-    
-    public void setPassword(String newPassword) {
-        this.password = newPassword;
+    public boolean getIsActive(){
+        return this.isActive;
     }
 
-    @Override 
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dateJoined=" + dateJoined +
-                '}';
+    // Setters 
+    public void setName(String newName){
+        this.name = newName;
+    }
+
+    public void setEmail(String newEmail){
+       this.email = newEmail; 
+    }
+    public void setPassword(String newPassword){
+        this.password = newPassword;
+    }
+    public void setIsActive(boolean newStatus){
+        this.isActive = newStatus;
     }
 
     @Override
