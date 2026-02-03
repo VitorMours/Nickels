@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import jakarta.persistence.Table;
 import net.bytebuddy.asm.Advice.OffsetMapping.Factory.Illegal;
 import jakarta.persistence.Entity;
@@ -31,7 +32,6 @@ import jakarta.persistence.Entity;
  * Classe de teste do modelo do usuario para verificar o comportamento presente  
  * dentro dos campos da entidade, e na forma como os metodos se comportam
  */ 
-@DataJpaTest
 public class UserModelTest {
 
     private User validUser;
@@ -40,8 +40,8 @@ public class UserModelTest {
     void setUp(){
         validUser = new User(
             "Joao Vitor",
-            "Rezende Moura",
-            "jvrezendemoura@gmail.com"
+            "jvrezendemoura@gmail.com",
+            "123213sad!"
         );
     }
 

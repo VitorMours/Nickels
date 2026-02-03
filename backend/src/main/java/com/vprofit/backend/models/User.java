@@ -33,6 +33,8 @@ public class User implements Serializable {
     @Column(nullable=false)
     private String password;
 
+    protected User(){}
+
     public User(String name, String email, String password) {
         if(name == null || name.equals("")){
             throw new IllegalArgumentException("O usuario nao pode ser criado sem nome");
