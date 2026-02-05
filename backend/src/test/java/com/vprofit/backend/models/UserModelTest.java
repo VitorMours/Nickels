@@ -168,4 +168,34 @@ public class UserModelTest {
         assertEquals(newUserPassword, "123123123!");
         assertEquals(newUserStatus, false);
     }
+
+    @Test 
+    @DisplayName("Impedir de setar valores vazios nos campos")
+    void impedirDeSetarValoresVaziosNosCampos(){
+        User newUser = new User(
+            "Lucas",
+            "teste@teste.com",
+            "123213213213asd!"
+        );       
+    
+        IllegalArgumentException nullEmailException = assertThrows(
+            IllegalArgumentException.class,
+            () -> newUser.setEmail(null)
+        );
+        assertEquals(nullEmailException.getMessage(), "The new value for email cannot be empty or null");
+
+        IllegalArgumentException nullNameException = assertThrows(
+            IllegalArgumentException.class, 
+            () -> newUser.setName(null)
+        );
+        assertEquals(nullNameException.getMessage(), "The new value for name cannot be empty or null");
+
+        IllegalArgumentException nullPasswordException = assertThrows(
+            IllegalArgumentException.class, 
+            () -> newUser.setPassword(null)
+        );
+        assertEquals(nullPasswordException.getMessage(), "The new value for password cannot be empty or null");
+    }
+
 }
+

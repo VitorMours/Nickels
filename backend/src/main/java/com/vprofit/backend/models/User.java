@@ -50,6 +50,7 @@ public class User implements Serializable {
         this.email = email; 
         this.password = password;
         this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.isActive = true;
     }
 
@@ -67,17 +68,35 @@ public class User implements Serializable {
     public boolean getIsActive(){
         return this.isActive;
     }
+    public Date getCreatedAt() {
+      return createdAt;
+    }
+    public Date getUpdatedAt() {
+      return updatedAt;
+    }
 
     // Setters 
     public void setName(String newName){
-        this.name = newName;
+        if(newName == null || newName.equals("")){
+            throw new IllegalArgumentException("The new value for name cannot be empty or null");
+        } else{
+            this.name = newName;
+    
+        }
     }
-
     public void setEmail(String newEmail){
-       this.email = newEmail; 
+        if(newEmail == null || newEmail.equals("")){
+            throw new IllegalArgumentException("The new value for email cannot be empty or null");
+        } else{
+            this.email = newEmail; 
+        }
     }
     public void setPassword(String newPassword){
-        this.password = newPassword;
+        if(newPassword == null || newPassword.equals("")){
+            throw new IllegalArgumentException("The new value for password cannot be empty or null");
+        } else{
+            this.password = newPassword;
+        }
     }
     public void setIsActive(boolean newStatus){
         this.isActive = newStatus;
