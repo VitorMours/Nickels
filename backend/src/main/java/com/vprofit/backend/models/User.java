@@ -34,13 +34,13 @@ public class User implements Serializable {
     private String password;
 
     public User(String name, String email, String password) {
-        if(name == null || name.equals("")){
+        if(name == null || name.equals("")) {
             throw new IllegalArgumentException("O usuario nao pode ser criado sem nome");
         }
-        if(email == null || email.equals("")){ //TODO: Add regex validation
+        if(email == null || email.equals("")) {
             throw new IllegalArgumentException("O usuario nao pode ser criado sem email");
         }
-        if(password == null || password.equals("")){
+        if(password == null || password.equals("")) {
             throw new IllegalArgumentException("O usuario nao pode ser criado sem senha");
         }
 
