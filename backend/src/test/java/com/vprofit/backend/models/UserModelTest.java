@@ -21,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import jakarta.persistence.Table;
 import net.bytebuddy.asm.Advice.OffsetMapping.Factory.Illegal;
 import jakarta.persistence.Entity;
@@ -31,7 +32,6 @@ import jakarta.persistence.Entity;
  * Classe de teste do modelo do usuario para verificar o comportamento presente  
  * dentro dos campos da entidade, e na forma como os metodos se comportam
  */ 
-@DataJpaTest
 public class UserModelTest {
 
     private User validUser;
@@ -40,8 +40,8 @@ public class UserModelTest {
     void setUp(){
         validUser = new User(
             "Joao Vitor",
-            "Rezende Moura",
-            "jvrezendemoura@gmail.com"
+            "jvrezendemoura@gmail.com",
+            "123213sad!"
         );
     }
 
@@ -168,4 +168,34 @@ public class UserModelTest {
         assertEquals(newUserPassword, "123123123!");
         assertEquals(newUserStatus, false);
     }
+
+    @Test 
+    @DisplayName("Impedir de setar valores vazios nos campos")
+    void impedirDeSetarValoresVaziosNosCampos(){
+        User newUser = new User(
+            "Lucas",
+            "teste@teste.com",
+            "123213213213asd!"
+        );       
+    
+        IllegalArgumentException nullEmailException = assertThrows(
+            IllegalArgumentException.class,
+            () -> newUser.setEmail(null)
+        );
+        assertEquals(nullEmailException.getMessage(), "The new value for email cannot be empty or null");
+
+        IllegalArgumentException nullNameException = assertThrows(
+            IllegalArgumentException.class, 
+            () -> newUser.setName(null)
+        );
+        assertEquals(nullNameException.getMessage(), "The new value for name cannot be empty or null");
+
+        IllegalArgumentException nullPasswordException = assertThrows(
+            IllegalArgumentException.class, 
+            () -> newUser.setPassword(null)
+        );
+        assertEquals(nullPasswordException.getMessage(), "The new value for password cannot be empty or null");
+    }
+
 }
+
