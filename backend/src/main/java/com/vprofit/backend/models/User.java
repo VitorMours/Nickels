@@ -98,8 +98,16 @@ public class User implements Serializable {
             this.password = newPassword;
         }
     }
+
     public void setIsActive(boolean newStatus){
         this.isActive = newStatus;
+    }
+
+    public void setUpdatedAt(Date newDate){
+      if(newDate == null || newDate.equals("")){
+        throw new IllegalArgumentException("The new value for updatedAt cannot be empty or null");
+      }
+        this.updatedAt = newDate;
     }
 
     @Override
