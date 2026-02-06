@@ -49,9 +49,6 @@ public class Account implements Serializable {
     this.user = user;
   }
 
-
-
-
   // Getters e Setters 
   // Getters 
   public String getName() {
