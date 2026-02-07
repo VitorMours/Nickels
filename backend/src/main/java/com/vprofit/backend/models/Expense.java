@@ -55,10 +55,18 @@ public class Expense implements Serializable {
       throw new IllegalArgumentException("A categoria nao pode ser vazio ou nulo");
     }
     else{
-      
-
-
+      this.name = name;
+      this.description = description;
+      this.value = value;
+      this.paymentMethod = paymentMethod;
+      this.category = category;
     }
   }
+  
+
+
+
+
+
 
 }
