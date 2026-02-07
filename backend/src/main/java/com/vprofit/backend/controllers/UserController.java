@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired; 
@@ -24,19 +25,20 @@ public class UserController {
   @Autowired
   private UserService userService; 
     
-
   @GetMapping 
   public ResponseEntity<List<User>> findAll(){
     return ResponseEntity.ok().body(userService.findAll());
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<User> findById(@PathVariable Long id){
+    User finded = userService.findById(id);
+    return ResponseEntity.ok(finded);
+  }
 
   @PostMapping 
   public ResponseEntity<User> createUser(@RequestBody User newUser){
     User createdUser = userService.create(newUser);
     return ResponseEntity.ok(createdUser);
-  
-
   }
-
 }
