@@ -1,0 +1,19 @@
+{
+    "name": "vitormours/nickels",
+    "description": "Projeto desenvolvido com o intuito de ser um gerenciador de despesas",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^12.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vitormours\\Nickels\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "João Vitor Rezende Moura",
+            "email": "72020085+VitorMours@users.noreply.github.com"
+        }
+    ]
+}
