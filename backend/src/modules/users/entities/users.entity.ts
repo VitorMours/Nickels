@@ -1,35 +1,25 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
-
+import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id!: number;
 
-  @Column({ unique: true })
-  email!: string;
-
-  @Column({ nullable: false })
+  @Column()
   firstName!: string;
-
 
   @Column({ nullable: true })
   lastName?: string;
 
-  @Column({ default: true })
-  isActive!: boolean;
+  @Column({ unique: true })
+  email!: string;
 
-  @CreateDateColumn({ 
-    type: 'timestamp', 
-    default: () => 'CURRENT_TIMESTAMP(6)' 
-  })
+  @Column()
+  password!: string;
+
+  @CreateDateColumn()
   createdAt!: Date;
 
-  @UpdateDateColumn({ 
-    type: 'timestamp', 
-    default: () => 'CURRENT_TIMESTAMP(6)', 
-    onUpdate: 'CURRENT_TIMESTAMP(6)' 
-  })
+  @UpdateDateColumn()
   updatedAt!: Date;
-
 }
