@@ -5,4 +5,5 @@ export interface UserServiceInterface {
   findAll(): Promise<User[]>;
   findOne(id: number): Promise<User | null>;
   create(user: CreateUserDto): Promise<User>;
+  delete(id: number): void;
 }
