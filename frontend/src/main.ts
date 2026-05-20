@@ -1,12 +1,28 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+/**
+ * main.ts
+ *
+ * Bootstraps Vuetify and other plugins then mounts the App`
+ */
 
-import App from './App.vue'
-import router from './router'
+// Composables
+import { createApp } from 'vue'
+
+// Plugins
+import { registerPlugins } from '@/plugins'
+
+// Components
+import App from './App.vue';
+
+// Styles
+import 'unfonts.css'
+import './styles/tailwind.css'
+import './styles/main.scss'
+import { router } from './router'
 
 const app = createApp(App)
 
-app.use(createPinia())
 app.use(router)
+
+registerPlugins(app)
 
 app.mount('#app')

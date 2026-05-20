@@ -1,4 +1,4 @@
-# SignClass
+# Nickels
 <p align="center">
   <a href="https://go-skill-icons.vercel.app/">
     <img
