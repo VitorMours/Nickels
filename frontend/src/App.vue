@@ -5,7 +5,9 @@
 <template>
   <v-app>
     <HeaderNavBar />
-    <v-main><router-view /></v-main>
+    <v-main fluid fill-height>
+    <router-view />
+    </v-main>
   </v-app>
 </template>
 
