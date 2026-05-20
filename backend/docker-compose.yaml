@@ -1,0 +1,55 @@
+
+services:
+  nickels_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nickels_backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:password@db:5432/nickels_db
+    depends_on:
+      - nickels_db
+    networks:
+      - nickels_network
+    restart: always
+  nickels_db:
+    image: postgres:15-alpine
+    container_name: nickels_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: nickels_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - nickels_data:/var/lib/postgresql/data 
+    networks:
+      - nickels_network
+    restart: always
+
+  nickels_pgadmin:
+    image: dpage/pgadmin4
+    container_name: nickels_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - "8080:80" 
+    depends_on:
+      - nickels_db
+    networks:
+      - nickels_network
+    restart: unless-stopped
+
+networks:
+  nickels_network:
+    driver: bridge
+
+volumes:
+  nickels_data:
+    
