@@ -11,7 +11,8 @@ services:
       - .env
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:password@db:5432/nickels_db
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:password@nickels_db:5432/nickels_db
     depends_on:
       - nickels_db
     networks:
