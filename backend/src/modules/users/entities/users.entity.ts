@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Account } from "src/modules/account/entities/account.entity";
+import { Entity, Column, PrimaryColumn, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -16,6 +17,9 @@ export class User {
 
   @Column()
   password!: string;
+
+  @OneToMany(() => Account, (account) => account.users)
+  accounts?: Account[];
 
   @CreateDateColumn()
   createdAt!: Date;

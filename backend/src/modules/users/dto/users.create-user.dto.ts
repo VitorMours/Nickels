@@ -8,7 +8,7 @@ export class CreateUserDto {
    */
   @ApiPropertyOptional({ example: 'John' }) // Caso não use o plugin
   @IsString()
-  firstName: string; // O plugin detecta como obrigatório
+  firstName!: string; // O plugin detecta como obrigatório
 
   /**
    * Sobrenome do usuário
@@ -25,7 +25,7 @@ export class CreateUserDto {
    */
   @ApiPropertyOptional({ example: 'joao@email.com' }) // Caso não use o plugin
   @IsEmail()
-  email: string;
+  email!: string;
   
   /**
    * Senha de acesso (mínimo 6 caracteres)
@@ -34,5 +34,5 @@ export class CreateUserDto {
   @ApiPropertyOptional({ minLength: 6, example: 'novaSenha123' }) // Caso não use o plugin
   @IsString()
   @MinLength(6) // O plugin adiciona automaticamente a restrição de "minLength: 6" no Swagger
-  password: string;
+  password!: string;
 }
