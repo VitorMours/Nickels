@@ -7,7 +7,7 @@ export interface AccountServiceInterface {
     findAll() : Promise<Account[]>;
     findOne(id: number) : Promise<Account | null>;
     updateById(id: number, dto: UpdateAccountDto) : Promise<Account | null>
-    createAccount(id: number, dto: CreateAccountDto) : Promise<Account | null>
-    deleteById() : void;
+    createAccount(dto: CreateAccountDto) : Promise<Account | null>
+    deleteAccountById(id: number) : void;
 }
 
