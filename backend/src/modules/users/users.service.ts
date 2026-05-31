@@ -18,6 +18,10 @@ export class UsersService implements UserServiceInterface{
     return await this.userRepository.findOneBy({ id });
   }
 
+  async findOneByEmail(email: string) : Promise<User | null>{
+    return await this.userRepository.findOneBy({ email });
+  }
+
   async create(user: CreateUserDto): Promise<User> {
     const newUser = this.userRepository.create(user);
     return await this.userRepository.save(newUser);
