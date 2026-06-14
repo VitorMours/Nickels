@@ -1,27 +1,30 @@
-import { Controller, HttpCode, Get, Post, Patch, Delete, BadRequestException } from "@nestjs/common";
+import { Controller, HttpCode, Get, Post, Patch, Delete, BadRequestException, Body } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { CreateLoginDto } from "./dto/auth.create-login.dto";
 import { User } from "../users/entities/users.entity";
-import { CreateSigninDto } from "./dto/auth.crete-signin.dto";
+import { CreateSigninDto } from "./dto/auth.create-signin.dto";
+import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
 
     constructor(private readonly authService: AuthService){}
 
-    @HttpCode(200)
+    @HttpCode(201)
     @Post('login')
+    @ApiBody({ type: CreateLoginDto })
+    @ApiResponse({ status: 201, description: 'Access token created'})
     public async login(dto: CreateLoginDto) {
-        const user = await this.authService.createLogin(dto);
-        if(!user) {
-            throw new BadRequestException("Invalid credentials");
-        }
-        return user;
+        return await this.authService.createLogin(dto);
+        
     }
 
     @HttpCode(201)
     @Post('signin')
-    public async signin(dto: CreateSigninDto) : Promise<User | null> {
+    @ApiBody({ type: CreateSigninDto })
+    @ApiResponse({ status: 201, description: 'Successful sign in'})
+    public async signin(@Body() dto: CreateSigninDto): Promise<User | null> {
         return await this.authService.createSignin(dto);
     }
 }

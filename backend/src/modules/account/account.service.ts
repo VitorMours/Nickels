@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import type { AccountServiceInterface } from "./account.service.interface";
-import { Account } from "./entities/account.entity";
+import Account from "./entities/account.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateAccountDto } from "./dto/account.create-account.dto";

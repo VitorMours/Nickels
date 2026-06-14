@@ -2,13 +2,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "../users/entities/users.entity";
 import { AuthServiceInterface } from "./auth.service.interface";
 import { CreateLoginDto } from "./dto/auth.create-login.dto";
-import { CreateSigninDto } from "./dto/auth.crete-signin.dto";
+import { CreateSigninDto } from "./dto/auth.create-signin.dto";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthService implements AuthServiceInterface {
-    constructor(private usersService: UsersService){}
+    constructor(private usersService: UsersService, private jwtService: JwtService){}
 
     async createSignin(data: CreateSigninDto): Promise<User | null> {
         try{
@@ -27,7 +28,7 @@ export class AuthService implements AuthServiceInterface {
         }
     }
 
-    async createLogin(data: CreateLoginDto): Promise<User | null> {
+    async createLogin(data: CreateLoginDto): Promise<{ access_token : string } | null> {
         try{
             const user = await this.usersService.findOneByEmail(data.email);
             if(!user) {
@@ -36,7 +37,8 @@ export class AuthService implements AuthServiceInterface {
             if(data.password !== user.password){
                 throw new NotFoundException("Incorrect password");
             }
-            return user;
+            const payload = { email: data.email, password: data.password}
+            return {access_token: await this.jwtService.signAsync(payload)};
         } catch (error) {
             return null;
         }

@@ -16,6 +16,7 @@ describe("UsersController", () => {
           provide: UsersService,
           useValue: {
             findAll: jest.fn(), 
+            findOne: jest.fn(), 
           },
         },
       ],
@@ -31,7 +32,7 @@ describe("UsersController", () => {
   });
 
   describe("getUsers", () => {
-    it("should return all users, or none", async () => {
+    it("should return empty list of users", async () => {
       const result: User[] = []; 
       jest.spyOn(service, 'findAll').mockResolvedValue(result);
 
@@ -47,7 +48,6 @@ describe("UsersController", () => {
         createdAt: new Date(),
         updatedAt: new Date()
       };
-
       jest.spyOn(service, 'findAll').mockResolvedValueOnce([mockUser]);
       const result = await controller.getUsers();
       expect(result).toEqual([mockUser]);
@@ -57,8 +57,33 @@ describe("UsersController", () => {
   });
 
   describe("getUserById", () => {
-    it("should return one user finded by id or none", async () => {
+    it("should return empty", async () => {
       const result: User[] = [];
+      jest.spyOn(service, 'findOne').mockResolvedValue(result);
+      expect(await controller.getUserById(2)).toEqual([]);
     });
+
+    it("should return one specific user", async () => {
+      const result: User = {
+        id: 2,
+        firstName: "John Doe",
+        email : "john.doe@example.com",
+        password: "passsword123",
+        createdAt: new Date(),
+        updatedAt: new Date()
+
+      };
+      jest.spyOn(service, "findOne").mockResolvedValueOnce(result);
+      const response = await controller.getUserById(2);
+      expect(response).toEqual(result);
+      expect(service.findOne).toHaveBeenCalledWith(2);
+    });
+  });
+
+
+  describe("updateUser", () => {  
+    it("error updating user with empty data", async () => {})
+
+
   });
 });

@@ -1,9 +1,11 @@
 import { Controller, HttpCode, Get, Post, Patch, Delete, Param, Body } from "@nestjs/common";
 import { AccountService } from "./account.service";
-import { Account } from "./entities/account.entity";
+import Account from "./entities/account.entity";
 import { CreateAccountDto } from "./dto/account.create-account.dto";
 import { UpdateAccountDto } from "./dto/account.update-account.dto";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('accounts')
 @Controller("accounts")
 export class AccountControllers {
   constructor(private readonly accountService: AccountService){}

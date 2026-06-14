@@ -1,8 +1,8 @@
-import { User } from "src/modules/users/entities/users.entity";
+import { User } from "../../users/entities/users.entity";
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
 
 @Entity('accounts')
-export class Account{
+export default class Account {
   @PrimaryGeneratedColumn()
   id!: number;
 
