@@ -15,7 +15,7 @@ export class AuthController {
     @Post('login')
     @ApiBody({ type: CreateLoginDto })
     @ApiResponse({ status: 201, description: 'Access token created'})
-    public async login(dto: CreateLoginDto) {
+    public async login(@Body() dto: CreateLoginDto) {
         return await this.authService.createLogin(dto);
         
     }

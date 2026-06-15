@@ -1,9 +1,15 @@
-
 services:
   nickels_backend:
     build:
       context: .
       dockerfile: Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
     container_name: nickels_backend
     ports:
       - "3000:3000"
@@ -53,4 +59,3 @@ networks:
 
 volumes:
   nickels_data:
-    

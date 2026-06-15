@@ -1,41 +1,18 @@
-# ---------- Build stage ----------
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Copia package files primeiro para aproveitar cache
+# Copiamos apenas os arquivos de dependência para instalar
 COPY package*.json ./
 
-# Instala TODAS as dependências
-RUN npm ci
+# Instala todas as dependências (incluindo as de dev)
+RUN npm install
 
-# Copia restante da aplicação
+# Copiamos o resto do código depois
 COPY . .
 
-# Build do NestJS
-RUN npm run build
-
-# ---------- Production stage ----------
-FROM node:20-alpine AS production
-
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-# Copia apenas package files
-COPY package*.json ./
-
-# Instala apenas deps de produção
-RUN npm ci --omit=dev
-
-# Copia build gerado
-COPY --from=builder /app/dist ./dist
-
-# Expõe porta
+# Expõe a porta
 EXPOSE 3000
 
-# Usuário não-root
-USER node
-
-# Inicializa aplicação
-CMD ["node", "dist/main"]
+# O comando de watch do NestJS
+CMD ["npm", "run", "start:dev"]
