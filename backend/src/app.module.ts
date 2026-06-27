@@ -1,13 +1,16 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UsersModule } from './modules/users/users.module';
 import { AccountModule } from './modules/account/account.module'; 
 import { AuthModule } from './modules/auth/auth.module';
+import { LoggerService } from './common/services/logger.service';
+import { AppLoggerMiddleware } from './common/middlewares/appLogger.middleware';
 
 
 @Module({
+  providers: [LoggerService],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -32,4 +35,10 @@ import { AuthModule } from './modules/auth/auth.module';
     AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AppLoggerMiddleware)
+      .forRoutes('*'); 
+  }
+}
