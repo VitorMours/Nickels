@@ -28,7 +28,6 @@ export class AuthService implements AuthServiceInterface {
         }
     }
 
-    // No seu AuthService
     async createLogin(data: CreateLoginDto): Promise<{ access_token : string }> {
         const user = await this.usersService.findOneByEmail(data.email);
         if (!user) {
