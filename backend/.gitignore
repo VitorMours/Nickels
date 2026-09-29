@@ -1,87 +1,56 @@
-# =========================
-# Dependencies
-# =========================
-node_modules/
-jspm_packages/
+# compiled output
+/dist
+/node_modules
+/build
 
-# =========================
-# Build outputs
-# =========================
-dist/
-build/
-coverage/
-.out/
-.nuxt/
-.next/
-
-# =========================
 # Logs
-# =========================
-logs/
+logs
 *.log
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 lerna-debug.log*
 
-# =========================
-# Environment variables
-# =========================
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
 .env
-.env.*
-!.env.example
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-# =========================
-# IDEs and Editors
-# =========================
-.vscode/
-.idea/
-*.swp
-*.swo
-*.DS_Store
+# temp directory
+.temp
+.tmp
 
-# =========================
-# TypeScript
-# =========================
-*.tsbuildinfo
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# =========================
-# Vue
-# =========================
-.vuepress/dist
-.cache/
-.temp/
-
-# =========================
-# NestJS
-# =========================
-uploads/
-tmp/
-
-# =========================
-# Testing
-# =========================
-coverage/
-.nyc_output/
-
-# =========================
-# Package managers
-# =========================
-.pnp
-.pnp.js
-
-# =========================
-# Docker
-# =========================
-docker-compose.override.yml
-
-# =========================
-# OS generated files
-# =========================
-Thumbs.db
-
-# =========================
-# Misc
-# =========================
-*.local
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

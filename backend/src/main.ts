@@ -1,20 +1,18 @@
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { SwaggerModule } from 'node_modules/@nestjs/swagger/dist/swagger-module';
-import { DocumentBuilder } from 'node_modules/@nestjs/swagger/dist/document-builder';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const config = new DocumentBuilder()
-    .setTitle('Nickels API')
-    .setDescription('The Nickels API description')
-    .setVersion('1.0')
-    .addTag('nickels')
+    .setTitle('Nickels')
+    .setDescription('The financial freedom API')
+    .setVersion('0.0.1')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, documentFactory);
-  
+  SwaggerModule.setup('api/docs', app, documentFactory);
+
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
