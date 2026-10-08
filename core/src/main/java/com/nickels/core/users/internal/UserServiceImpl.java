@@ -1,12 +1,13 @@
 package com.nickels.core.users.internal;
 
-import com.nickels.core.users.UserRepository;
-import com.nickels.core.users.User;
-
+import com.nickels.core.users.internal.UserRepository;
+import com.nickels.core.users.internal.User;
+import com.nickels.core.users.UserService;
+import com.nickels.core.users.UserDto;
 
 import java.util.Optional;
 import java.util.UUID;
-import org.sprinframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
         return toDto(user);
     }
 
-    @Optional
+    @Override
     @Transactional(readOnly=true)
     public Optional<UserDto> findById(UUID id) {
         return repository.findById(id).map(this::toDto);
