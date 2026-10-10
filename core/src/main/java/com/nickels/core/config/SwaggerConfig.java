@@ -14,7 +14,7 @@ public class SwaggerConfig {
     public OpenAPI SwaggerAPI() {
         return new OpenAPI()
                         .info(new Info()
-                        .title("API do Meu Projeto")
+                        .title("Nickels core API")
                         .version("1.0.0")
                         .description("Documentação gerada automaticamente com SpringDoc OpenAPI"));
 
