@@ -1,8 +1,8 @@
-package com.nickels.core.users.internal;
+package com.nickels.core.users.requests;
 
 import jakarta.validation.constraints.*;
 
-record CreatedUserRequest(
+public record CreatedUserRequest(
     @NotBlank String name,
     @NotBlank @Email String email,
     @NotBlank @Size(min = 8) String password

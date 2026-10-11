@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.nickels.core.users.UserService;
 import com.nickels.core.users.UserDto;
-import com.nickels.core.users.internal.CreatedUserRequest;
+import com.nickels.core.users.requests.CreatedUserRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -50,7 +50,7 @@ public class UserController {
 	@Operation(summary="Criacao de Usuario", description="Endpoint de criacao de usuario com base no json do body, e seguindo o padrao do schema do UserDto")
 	@PostMapping
 	public ResponseEntity<UserDto> create(@Valid @RequestBody CreatedUserRequest request){
-		UserDto dto = service.create(request.name(), request.email(), request.password());
+		UserDto dto = service.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 	}
 }

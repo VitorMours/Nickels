@@ -31,33 +31,39 @@ import java.time.Instant;
 @Table(name="credentials")
 public class Credentials {
 
-
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
-    public UUID id;
+    private UUID id;
 
+    @Column(name = "user_email", nullable = false, unique = true)
+    private String userEmail;
 
-    @Column(nullable=false, unique=true)
-    public String email;
+    @Column(nullable = false)
+    private String password;
 
-    @Column(nullable=false)
-    public String password;
+    @Column(nullable = false)
+    private Instant createdAt;
 
-    @Column
-    public Instant createdAt;
+    @Column(nullable = false)
+    private Instant updatedAt;
 
-    @Column
-    public Instant updatedAt;
-
-
-
-    private Credentials() {}
-
-
+    protected Credentials() {}
 
     public Credentials(String email, String password) {
-        this.email = email;
+        this.userEmail = email;
         this.password = password;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @PrePersist
@@ -69,12 +75,11 @@ public class Credentials {
 
     @PreUpdate
     void onUpdate() {
-        var now = Instant.now();
-        this.updatedAt = now;
+        this.updatedAt = Instant.now();
     }
 
     @Override
     public String toString() {
-        return "Credential[id=%s, email=%s, password=%s]".formatted(id, email, password);
+        return "Credential[id=%s, email=%s, password=%s]".formatted(id, userEmail, password);
     }
 }

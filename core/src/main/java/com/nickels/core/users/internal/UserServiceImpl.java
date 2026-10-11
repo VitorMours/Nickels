@@ -4,31 +4,46 @@ import com.nickels.core.users.internal.UserRepository;
 import com.nickels.core.users.internal.User;
 import com.nickels.core.users.UserService;
 import com.nickels.core.users.UserDto;
+import com.nickels.core.users.requests.CreatedUserRequest;
+import com.nickels.core.users.events.UserRegisteredEvent;
 
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.ApplicationEventPublisher;
 
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
+    private final ApplicationEventPublisher events;
 
-    UserServiceImpl(UserRepository repository) { // sem @Autowired
+    UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder, ApplicationEventPublisher events) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+        this.events = events;
     }
 
     @Override
     @Transactional
-    public UserDto create(String name, String password, String email) {
-        if(repository.existsByEmail(email)) {
+    public UserDto create(CreatedUserRequest request) {
+        if(repository.existsByEmail(request.email())) {
             throw new IllegalArgumentException("Email ja cadastrado");
         }
 
-        User user = repository.save(new User(name, email, password)); //TODO: Conseguir adicionar o password encoder
+        User user = repository.save(new User(request.name(), request.email()));
+
+        events.publishEvent(new UserRegisteredEvent(
+            user.getId(),
+            user.getName(),
+            user.getEmail(),
+            passwordEncoder.encode(request.password())
+        ));
+
         return toDto(user);
     }
 

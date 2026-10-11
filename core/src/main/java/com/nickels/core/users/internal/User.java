@@ -11,7 +11,6 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-
 /**
  * Entidade de representacao do usuario.
  *
@@ -21,57 +20,49 @@ import jakarta.persistence.GenerationType;
  * @param id        UUID de identificacao do usuario
  * @param name      Nome do usuario
  * @param email     Email do usuario
- * @param password  Senha do usuario
  * @param createdAt Timestamp que o usuario foi criado
  * @param updatedAt Timestamp que o usuario teve ultima modificacao
  *
  * @author Joao Vitor Rezende Moura
- * @version v0.0.1
+ * @version v0.0.3
  * @since 10-06-2026
  *
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
-
     @Id
-    @GeneratedValue(strategy=GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
-    private String password;
-
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Instant createdAt;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Instant updatedAt;
 
     // Required by the JPA
     protected User() {}
 
-
     /**
      * Construtor da entidade
      *
-     * @param name      Nome do usuario
-     * @param email     Email do usuario
-     * @param password  Senha do usuario
+     * @param name  Nome do usuario
+     * @param email Email do usuario
      *
      * @throws IllegalArgumentException caso as funcoes de validacao levantem erros
      */
-    public User(String name, String email, String password) {
-    // ADICIONAR VALIDADORES ESTATICOS
+    public User(String name, String email) {
+        // ADICIONAR VALIDADORES ESTATICOS
         this.name = name;
         this.email = email;
-        this.password = password;
     }
 
     @PrePersist
@@ -83,15 +74,13 @@ public class User {
 
     @PreUpdate
     void onUpdate() {
-        var now = Instant.now();
-        this.updatedAt = now;
+        this.updatedAt = Instant.now();
     }
 
     // Getters
     public UUID getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
-    public String getPassword() { return password; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
 
