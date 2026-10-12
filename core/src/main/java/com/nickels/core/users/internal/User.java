@@ -77,7 +77,6 @@ public class User {
         this.updatedAt = Instant.now();
     }
 
-    // Getters
     public UUID getId() { return id; }
     public String getName() { return name; }
     public String getEmail() { return email; }
