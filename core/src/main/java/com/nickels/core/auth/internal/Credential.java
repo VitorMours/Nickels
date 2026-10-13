@@ -1,17 +1,16 @@
 package com.nickels.core.auth.internal;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 
 import java.util.UUID;
 import java.time.Instant;
-
 
 /**
  * Entidade Credentials
@@ -29,7 +28,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name="credentials")
-public class Credentials {
+public class Credential {
 
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
@@ -47,9 +46,9 @@ public class Credentials {
     @Column(nullable = false)
     private Instant updatedAt;
 
-    protected Credentials() {}
+    protected Credential() {}
 
-    public Credentials(String email, String password) {
+    public Credential(String email, String password) {
         this.userEmail = email;
         this.password = password;
     }

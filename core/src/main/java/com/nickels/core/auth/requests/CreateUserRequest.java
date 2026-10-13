@@ -1,8 +1,8 @@
 package com.nickels.core.auth.requests;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * Represents the request body for creating a new user in the system
