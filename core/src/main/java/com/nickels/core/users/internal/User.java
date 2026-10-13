@@ -11,6 +11,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import com.nickels.core.shared.Validators;
+
 /**
  * Entidade de representacao do usuario.
  *
@@ -60,9 +62,8 @@ public class User {
      * @throws IllegalArgumentException caso as funcoes de validacao levantem erros
      */
     public User(String name, String email) {
-        // ADICIONAR VALIDADORES ESTATICOS
-        this.name = name;
-        this.email = email;
+        this.name = Validators.requireNotBlank(name);
+        this.email = Validators.requireEmail(email);
     }
 
     @PrePersist

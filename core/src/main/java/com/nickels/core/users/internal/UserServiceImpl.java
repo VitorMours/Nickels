@@ -14,10 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.context.ApplicationEventPublisher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final ApplicationEventPublisher events;
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDto create(CreatedUserRequest request) {
         if(repository.existsByEmail(request.email())) {
+            log.warn("Tentativa de criação de usuário com email já cadastrado: {}", request.email());
             throw new IllegalArgumentException("Email ja cadastrado");
         }
 
@@ -43,13 +47,14 @@ public class UserServiceImpl implements UserService {
             user.getEmail(),
             passwordEncoder.encode(request.password())
         ));
-
+        log.info("Usuario criado com sucesso: {}", user.getId());
         return toDto(user);
     }
 
     @Override
     @Transactional(readOnly=true)
     public Optional<UserDto> findById(UUID id) {
+        log.info("Buscando usuario com o id {}", id);
         return repository.findById(id).map(this::toDto);
     }
 

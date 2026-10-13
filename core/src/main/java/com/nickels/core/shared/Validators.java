@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public final class Validators {
 
-    private static final Pattern EMAIL = Pattern.compile("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
+    private static final Pattern EMAIL = Pattern.compile("^[^@\\s]+@([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z]{2,}$");
 
     private Validators() {}
 
@@ -28,9 +28,9 @@ public final class Validators {
      * @throws IllegalArgumentException se o parametro for obrigatorio dentro da estrutura
      *
      */
-    public static String requireNotBlank(String value, String field) {
+    public static String requireNotBlank(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(field + " é obrigatório");
+            throw new IllegalArgumentException("Value is invalid");
         }
         return value;
     }
@@ -43,9 +43,9 @@ public final class Validators {
      *
      */
     public static String requireEmail(String value) {
-        requireNotBlank(value, "email");
+        requireNotBlank(value);
         if (!EMAIL.matcher(value).matches()) {
-            throw new IllegalArgumentException("email inválido");
+            throw new IllegalArgumentException("invalid email");
         }
         return value.toLowerCase();
     }
