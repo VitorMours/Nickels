@@ -1,11 +1,7 @@
-import { defineConfig } from "vite";
-import { fileURLToPath, URL } from "node:url";
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
 
+// https://vite.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: [{ find: "@", replacement: fileURLToPath(new URL("./src", import.meta.url)) }],
-  },
-  plugins: [tailwindcss(), react()],
-});
+  plugins: [vue()],
+})
