@@ -1,6 +1,6 @@
 package com.nickels.core.users.internal;
 
-import com.nickels.core.users.UserDto;
+import com.nickels.core.users.dto.UserDto;
 import com.nickels.core.users.UserService;
 import com.nickels.core.users.internal.User;
 import com.nickels.core.users.internal.UserRepository;

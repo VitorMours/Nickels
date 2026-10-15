@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-import com.nickels.core.users.UserDto;
+import com.nickels.core.users.dto.UserDto;
 import com.nickels.core.users.UserService;
 import com.nickels.core.users.requests.UserDataRequest;
 

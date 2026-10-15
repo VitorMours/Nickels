@@ -3,6 +3,7 @@ package com.nickels.core.users;
 import java.util.UUID;
 import java.util.Optional;
 import com.nickels.core.users.requests.UserDataRequest;
+import com.nickels.core.users.dto.UserDto;
 
 public interface UserService {
     UserDto create(UserDataRequest request);

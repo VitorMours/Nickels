@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.nickels.core.users.UserDto;
 import com.nickels.core.users.UserService;
 import com.nickels.core.auth.dto.SignupDto;
 import com.nickels.core.auth.dto.CredentialDto;

@@ -1,4 +1,4 @@
-package com.nickels.core.users;
+package com.nickels.core.users.dto;
 
 import java.util.UUID;
 
