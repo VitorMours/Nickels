@@ -1,4 +1,4 @@
-package com.nickels.core.auth;
+package com.nickels.core.auth.dto;
 
 import java.util.UUID;
 

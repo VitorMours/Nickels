@@ -38,9 +38,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = repository.save(new User(request.name(), request.email()));
-
-
-        log.info("Usuario criado com sucesso: {}", user.getId());
+        log.debug("User created with success: {}", user.getId());
         return toDto(user);
     }
 

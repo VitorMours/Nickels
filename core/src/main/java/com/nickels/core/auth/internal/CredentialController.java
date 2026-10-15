@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.UUID;
 import jakarta.validation.Valid;
 
-import com.nickels.core.auth.SignupDto;
 import com.nickels.core.users.UserService;
-import com.nickels.core.auth.CredentialDto;
+import com.nickels.core.auth.dto.SignupDto;
+import com.nickels.core.auth.dto.CredentialDto;
 import com.nickels.core.auth.CredentialService;
 import com.nickels.core.auth.requests.LoginUserRequest;
 import com.nickels.core.auth.requests.CreateUserRequest;
@@ -55,7 +54,7 @@ public class CredentialController {
     @Operation(summary="Signup Fields", description="Fields required to signup a new user")
     @GetMapping("/signup")
     public ResponseEntity<String> getSignupFields() {
-        return ResponseEntity.ok().body("");
+        return ResponseEntity.ok().body("{'name':'string','email':'string','password':'string'}");
     }
 
     @Operation(summary="Signup User", description="Action to signup a new user using the data from the body and if he's not already registered in the system.")
@@ -64,7 +63,7 @@ public class CredentialController {
         if (credentialService.isEmailRegistered(request.email())) {
             throw new EmailAlreadyRegisteredException(request.email());
         }
-        CredentialDto credential = credentialService.signupUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(credential);
+        CredentialDto signup = credentialService.signupUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(signup);
     }
 }

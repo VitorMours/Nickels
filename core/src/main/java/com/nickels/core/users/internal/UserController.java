@@ -2,6 +2,7 @@ package com.nickels.core.users.internal;
 
 import java.util.UUID;
 import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
