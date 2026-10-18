@@ -41,6 +41,9 @@ public class Credential {
     private String password;
 
     @Column(nullable = false)
+    private boolean emailVerified;
+
+    @Column(nullable = false)
     private Instant createdAt;
 
     @Column(nullable = false)
@@ -48,9 +51,10 @@ public class Credential {
 
     protected Credential() {}
 
-    public Credential(String email, String password) {
+    public Credential(String email, String password, boolean emailVerified) {
         this.userEmail = email;
         this.password = password;
+        this.emailVerified = emailVerified;
     }
 
     public UUID getId() {
