@@ -1,1 +1,11 @@
-Adicioanr o hasher de senha e adicionjar tambem o swagger dentro da aplicacao
+Core:
+- Adicionar configuracoes do RabbitMQ
+- Adicionar o servico de verificacao de email
+- Fazer migracao dos bancos de dados
+- Receber email autenticado e modificar registro no banco de dados
+
+Mail:
+- Fazer Dashboard de visualziaca dentro do flask admin
+- Fazer envio do email
+- Fazer autenticacao segura de acesso do dashboard de usuarios
+- Fazer redirecionamento de qualquer rota dentro da porta, para o login de email de gestor
